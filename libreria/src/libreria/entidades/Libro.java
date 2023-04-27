@@ -22,8 +22,7 @@ import javax.persistence.NamedQuery;
 @Entity
 public class Libro implements Serializable {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id    
     private Long isbn;
     
     private String titulo;

@@ -30,10 +30,12 @@ public class LibroServicio {
         this.editorialServicio = editorialServicio;
     }   
     
-    public Libro crearAutor(String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+    public Libro crearLibro(Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) throws Exception {
         //algun dato null/vacio
+        //ya existe el libro
         Libro libro = new Libro();
         try {
+            libro.setIsbn(isbn);
             libro.setTitulo(titulo);
             libro.setAnio(anio);
             libro.setEjemplares(ejemplares);
@@ -75,8 +77,24 @@ public class LibroServicio {
         try {
             return DAO.listarTodos();
         } catch (Exception e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return null;
         }
+    }
+    
+    public void editar(Libro libro) throws Exception {
+        try{
+            DAO.editar(libro);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }    
+        
+    }
+    
+    public Libro buscarPorTitulo(String titulo) throws Exception{
+        if (DAO.buscarPorTitulo(titulo).getTitulo() == null){
+            throw new Exception("El libro con el titulo indicado no se encuentra registrado");
+        }
+        return DAO.buscarPorTitulo(titulo);
     }
 }

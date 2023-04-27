@@ -71,4 +71,8 @@ public class AutorServicio {
             return null;
         }
     }
+    
+    public Autor buscarPorNombre(String nombre) throws Exception{
+        return DAO.buscarPorNombre(nombre);
+    }
 }

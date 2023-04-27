@@ -17,10 +17,7 @@ public class LibroDAO extends DAO<Libro>{
     @Override
     public void guardar(Libro libro) {
         
-        try{
-            if (buscarPorTitulo(libro.getTitulo()).getTitulo().equalsIgnoreCase(libro.getTitulo())){
-                throw new Exception("El libro ya está registrado");                
-            }
+        try{            
             super.guardar(libro);
         }catch(Exception e){
             System.out.println(e.getMessage());
@@ -73,9 +70,7 @@ public class LibroDAO extends DAO<Libro>{
         try{    
             conectar();
             Libro libro = em.createNamedQuery("Libro.buscarPorTitulo", Libro.class).setParameter("titulo", titulo).getSingleResult();
-            if (libro == null){
-                throw new Exception("El libro con el titulo indicado no se encuentra registrado");
-            }
+            
             desconectar();
             return libro;
         }catch(Exception e){
@@ -114,6 +109,14 @@ public class LibroDAO extends DAO<Libro>{
             System.out.println(e.getMessage());
             return null;
         }
-    }
+    }    
     
+    @Override
+    public void editar(Libro libro) {        
+        try{
+            super.editar(libro);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }    
+    }
 }

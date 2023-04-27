@@ -71,4 +71,9 @@ public class EditorialServicio {
             return null;
         }
     }
+    
+    public Editorial buscarPorNombre(String nombre) throws Exception{
+        return DAO.buscarPorNombre(nombre);
+        
+    }
 }
